@@ -17,6 +17,7 @@ package com.ebay.feed.model.feed.download;
 import java.util.List;
 import com.ebay.feed.model.error.ErrorData;
 import com.ebay.feed.model.feed.operation.filter.Response;
+import com.ebay.feed.model.feed.operation.internal.InvokeResponse;
 
 /**
  * <div>
@@ -51,6 +52,12 @@ import com.ebay.feed.model.feed.operation.filter.Response;
  */
 public class GetFeedResponse extends Response {
 
+  public GetFeedResponse(Integer statusCode, String message, String filePath, List<ErrorData> errors, InvokeResponse responseFlag) {
+    super(statusCode, message, filePath, null);
+    this.errors = errors;
+    this.invokeResponse = responseFlag;
+  }
+
   public GetFeedResponse(Integer statusCode, String message, String filePath, List<ErrorData> errors) {
     super(statusCode, message, filePath, null);
     this.errors = errors;
@@ -58,8 +65,18 @@ public class GetFeedResponse extends Response {
 
   private List<ErrorData> errors;
 
+  private InvokeResponse invokeResponse;
+
   public List<ErrorData> getErrors() {
     return errors;
+  }
+
+  public InvokeResponse getInvokeResponse() {
+    return invokeResponse;
+  }
+
+  public void setInvokeResponse(InvokeResponse invokeResponse) {
+    this.invokeResponse = invokeResponse;
   }
 
   public void setErrors(List<ErrorData> errors) {
@@ -69,7 +86,10 @@ public class GetFeedResponse extends Response {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("FeedApiResponse [errors=").append(errors).append("]");
+    builder.append("FeedApiResponse --errors ").append(errors);
+    builder.append(" --filePath ").append(this.getFilePath());
+    builder.append(" --message ").append(this.getMessage());
+    builder.append(" --date ").append((getInvokeResponse() != null && getInvokeResponse().getLastModified() != null) ? this.getInvokeResponse().getLastModified() : " ");
     return builder.toString();
   }
 

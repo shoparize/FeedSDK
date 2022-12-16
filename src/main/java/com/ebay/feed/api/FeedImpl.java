@@ -316,7 +316,7 @@ public class FeedImpl implements Feed {
 
         if (responseFlag.getStatusCode() == 200) {
             LOGGER.debug("First API Response is 200. All done..");
-            return new GetFeedResponse(Constants.SUCCESS_CODE, Constants.SUCCESS, fixFilePath(path, responseFlag), null);
+            return new GetFeedResponse(Constants.SUCCESS_CODE, Constants.SUCCESS, fixFilePath(path, responseFlag), null, responseFlag);
 
         } else if (responseFlag.getStatusCode() == 206) {
 
@@ -366,7 +366,7 @@ public class FeedImpl implements Feed {
                 responseRangeUpperLimit = Long.valueOf(responseFlag.getContentRange().split("/")[1]);
 
             }
-            return new GetFeedResponse(Constants.SUCCESS_CODE, Constants.SUCCESS, fixFilePath(path, responseFlag), null);
+            return new GetFeedResponse(Constants.SUCCESS_CODE, Constants.SUCCESS, fixFilePath(path, responseFlag), null, responseFlag);
         } else {
             LOGGER.debug("First API Response is error. Aborting...");
             return new GetFeedResponse(Constants.FAILURE_CODE, Constants.FAILURE, null, null);

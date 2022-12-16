@@ -340,17 +340,8 @@ public class FeedCli {
             return;
         }
 
-        // unzip
-        Response unzipResponse = feed.unzip(getFeedResponse.getFilePath());
-
-        if (unzipResponse.getStatusCode() != 0) {
-            return;
-        }
-
-        // filter
-        filterRequest.setInputFilePath(unzipResponse.getFilePath());
-        Response filterResponse = feed.filter(filterRequest);
-        LOGGER.info("Filter response = " + filterResponse.toString());
+        LOGGER.info("Filter response = " + getFeedResponse.toString());
+        System.out.print("Filter response = " + getFeedResponse.toString());
     }
 
 }
