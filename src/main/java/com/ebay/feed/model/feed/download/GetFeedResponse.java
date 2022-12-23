@@ -89,7 +89,7 @@ public class GetFeedResponse extends Response {
     builder.append("FeedApiResponse --errors ").append(errors);
     builder.append(" --filePath ").append(this.getFilePath());
     builder.append(" --message ").append(this.getMessage());
-    builder.append(" --date ").append((getInvokeResponse() != null && getInvokeResponse().getLastModified() != null) ? this.getInvokeResponse().getLastModified() : " ");
+    builder.append(" --date ").append((getInvokeResponse() != null && getInvokeResponse().getLastModifiedRaw() != null) ? this.getInvokeResponse().getLastModifiedRaw() : " ");
     return builder.toString();
   }
 

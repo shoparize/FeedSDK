@@ -27,6 +27,7 @@ public class InvokeResponse {
   private String contentRange;
   private int statusCode;
   private String lastModified;
+  private String lastModifiedRaw;
 
   public InvokeResponse(String contentRange, int statusCode) {
     super();
@@ -40,6 +41,14 @@ public class InvokeResponse {
 	    this.setStatusCode(statusCode);
 	    this.lastModified = lastModified;
 	  }
+
+    public InvokeResponse(String contentRange, int statusCode, String lastModified, String lastModifiedRaw) {
+        super();
+        this.contentRange = contentRange;
+        this.setStatusCode(statusCode);
+        this.lastModified = lastModified;
+        this.lastModifiedRaw = lastModifiedRaw;
+    }
 
   public String getContentRange() {
     return contentRange;
@@ -61,9 +70,17 @@ public class InvokeResponse {
 	return lastModified;
   }
 
-  public void setLastModified(String lastModified) {
-		this.lastModified = lastModified;
+    public String getLastModifiedRaw() {
+        return lastModifiedRaw;
+    }
+
+  public void setLastModifiedRaw(String lastModifiedRaw) {
+		this.lastModifiedRaw = lastModifiedRaw;
   }
+
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
 
 @Override
   public String toString() {

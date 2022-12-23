@@ -292,7 +292,7 @@ public class FeedImpl implements Feed {
      *
      * </p>
      *
-     * @param request The API request
+     * @param feedRequest The API request
      * @param path Path of the downloaded or partially downloading file, where
      * contents need to be appended
      * @param isStart - THe first request sets this parameter to true. If
@@ -458,13 +458,15 @@ public class FeedImpl implements Feed {
 
             String lastModifiedHeader = response.header(Constants.LAST_MODIFIED_DATE_HEADER);
             String lastModifiedDate = null;
+            String lastModifiedDateRaw = null;
             if (!StringUtils.isEmpty(lastModifiedHeader)) {
                 LocalDate localDate = LocalDate.parse(lastModifiedHeader, DateTimeFormatter.RFC_1123_DATE_TIME);
                 lastModifiedDate = localDate.format(DateTimeFormatter.BASIC_ISO_DATE);
+                lastModifiedDateRaw = lastModifiedHeader;
             }
 
             responseFlag
-                    = new InvokeResponse(response.header(Constants.CONTENT_RANGE_HEADER), response.code(), lastModifiedDate);
+                    = new InvokeResponse(response.header(Constants.CONTENT_RANGE_HEADER), response.code(), lastModifiedDate, lastModifiedDateRaw);
 
         } catch (Throwable t) {
             LOGGER.error("Exception in feed.invokeIteratively()", t);
